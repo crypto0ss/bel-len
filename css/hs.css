@@ -1,0 +1,134 @@
+@import "bootstrap/scss/functions.scss";
+@import "bootstrap/scss/variables.scss";
+@import "bootstrap/scss/mixins.scss";
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @include media-breakpoint-up($breakpoint) {
+    $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
+
+    .h1#{$infix} {
+      font-size: $h1-font-size !important;
+    }
+
+    .h2#{$infix} {
+      font-size: $h2-font-size !important;
+    }
+
+    .h3#{$infix} {
+      font-size: $h3-font-size !important;
+    }
+
+    .h4#{$infix} {
+      font-size: $h4-font-size !important;
+    }
+
+    .h5#{$infix} {
+      font-size: $h5-font-size !important;
+    }
+
+    .h6#{$infix} {
+      font-size: $h6-font-size !important;
+    }
+
+    .display-1#{$infix} {
+      font-size: $display1-size !important;
+      font-weight: $display1-weight;
+      line-height: $display-line-height;
+    }
+
+    .display-2#{$infix} {
+      font-size: $display2-size !important;
+      font-weight: $display2-weight;
+      line-height: $display-line-height;
+    }
+
+    .display-3#{$infix} {
+      font-size: $display3-size !important;
+      font-weight: $display3-weight;
+      line-height: $display-line-height;
+    }
+
+    .display-4#{$infix} {
+      font-size: $display4-size !important;
+      font-weight: $display4-weight;
+      line-height: $display-line-height;
+    }
+  }
+}
+
+
+
+
+// Generate series of `.navbar-expand-*` responsive classes for configuring
+// where your navbar collapses.
+.navbar-expand {
+  @each $breakpoint in map-keys($grid-breakpoints) {
+    $next: breakpoint-next($breakpoint, $grid-breakpoints);
+    $infix: breakpoint-infix($next, $grid-breakpoints);
+
+    // stylelint-disable-next-line scss/selector-no-union-class-name
+    &#{$infix} {
+      @include media-breakpoint-up($next) {
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+
+        .navbar-nav {
+          flex-direction: row;
+
+          .dropdown-menu {
+            position: absolute;
+          }
+
+          .nav-link {
+            padding-right: $navbar-nav-link-padding-x;
+            padding-left: $navbar-nav-link-padding-x;
+          }
+        }
+
+        .navbar-nav-scroll {
+          overflow: visible;
+        }
+
+        .navbar-collapse {
+          display: flex !important; // stylelint-disable-line declaration-no-important
+          flex-basis: auto;
+        }
+
+        .navbar-toggler {
+          display: none;
+        }
+
+        .offcanvas-header {
+          display: none;
+        }
+
+        .offcanvas {
+          position: inherit;
+          bottom: 0;
+          z-index: 1000;
+          flex-grow: 1;
+          visibility: visible !important; // stylelint-disable-line declaration-no-important
+          background-color: transparent;
+          border-right: 0;
+          border-left: 0;
+          @include transition(none);
+          transform: none;
+        }
+
+        .offcanvas-top,
+        .offcanvas-bottom {
+          height: auto;
+          border-top: 0;
+          border-bottom: 0;
+        }
+
+        .offcanvas-body {
+          display: flex;
+          flex-grow: 0;
+          padding: 0;
+          overflow-y: visible;
+        }
+      }
+    }
+  }
+}
